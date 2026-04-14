@@ -1,6 +1,6 @@
 # Thermal Camera ONVIF Server
 
-Python ONVIF IP-camera server for Raspberry Pi with the Meridian Innovation MI48 thermal sensor (Bobcat µHAT). Reads frames via SPI, renders them as a colour-mapped MJPEG stream with a live temperature scale, and exposes a full ONVIF interface so any NVR or VMS can discover and connect to it like a regular IP camera.
+Python ONVIF IP-camera server for Raspberry Pi with the [Waveshare Thermal Camera HAT](https://www.waveshare.com/wiki/Thermal_Camera_HAT) (Meridian Innovation MI48 sensor, 80×62 px). Reads frames via SPI, renders them as a colour-mapped MJPEG stream with a live temperature scale, and exposes a full ONVIF interface so any NVR or VMS can discover and connect to it like a regular IP camera.
 
 A separate `mediamtx` service transcodes the MJPEG stream to H.264 and serves it over standard RTSP (port 554) for NVRs that require it.
 

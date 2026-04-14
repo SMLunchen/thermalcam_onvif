@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.log
+
+# Virtual environment (venv artifacts accidentally placed in repo root)
+bin/
+lib/
+share/
+include/
+pyvenv.cfg
+
+# Claude Code internal directory (sessions, memory, tool state)
+.claude/
+
+# Stale / superseded files
+install.sh.sh
+
+# pysenxor subdir – keep driver source, ignore build artefacts and dev files
+Thermal_Camera_Hat/pysenxor-master/build/
+Thermal_Camera_Hat/pysenxor-master/dist/
+Thermal_Camera_Hat/pysenxor-master/*.log
+Thermal_Camera_Hat/pysenxor-master/auth.txt
+Thermal_Camera_Hat/pysenxor-master/thermal_onvif_server.py
+Thermal_Camera_Hat/pysenxor-master/thermal_onvif_server2.py
+
+# Credentials – auth.json is committed with default values (admin/admin).
+# If you change the passwords and don't want them in git, uncomment this:
+# auth.json
