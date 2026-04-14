@@ -227,52 +227,52 @@ H.264 Constrained Baseline, 720×480, 25 fps, 1500 kbps.
 
 ## Synology Surveillance Station
 
-### Via ONVIF (empfohlen)
+### Via ONVIF (recommended)
 
-Der Server unterstützt vollständig **WS-Security UsernameToken** (PasswordDigest und PasswordText) – die Authentifizierungsmethode, die Synology standardmäßig verwendet.
+The server fully supports **WS-Security UsernameToken** (PasswordDigest and PasswordText) — the authentication method Synology uses by default.
 
-1. **Surveillance Station** → IP-Kamera → Hinzufügen
-2. "Kamera suchen" überspringen → **Manuell hinzufügen**
-3. Felder ausfüllen:
+1. Open **Surveillance Station** → IP Camera → Add
+2. Skip camera search → **Add Manually**
+3. Fill in the fields:
 
-   | Feld | Wert |
-   |------|------|
-   | Marke | ONVIF |
-   | Modell | ONVIF Kamera |
-   | Protokoll | HTTP |
-   | IP-Adresse | `<pi-ip>` |
+   | Field | Value |
+   |-------|-------|
+   | Brand | ONVIF |
+   | Model | ONVIF Camera |
+   | Protocol | HTTP |
+   | IP address | `<pi-ip>` |
    | Port | `8000` |
-   | Benutzername | `admin` |
-   | Kennwort | `admin` |
+   | Username | `admin` |
+   | Password | `admin` |
 
-4. **Verbindung testen** → Übernehmen.
+4. **Test Connection** → Apply.
 
-Surveillance Station ruft Stream-URL und Snapshot-URL automatisch über ONVIF ab und verbindet dann über RTSP (H.264).
+Surveillance Station retrieves the stream URL and snapshot URL automatically via ONVIF and then connects over RTSP (H.264).
 
-> `GetSystemDateAndTime` ist gemäß ONVIF-Spezifikation ohne Authentifizierung erreichbar – das ist korrekt und wird von Synology benötigt, um den Digest-Nonce zu berechnen.
+> `GetSystemDateAndTime` is intentionally unauthenticated per the ONVIF spec — Synology requires this to compute the digest nonce before it has credentials.
 
 ---
 
-### Via RTSP (Fallback)
+### Via RTSP (fallback)
 
-Falls die ONVIF-Erkennung fehlschlägt:
+If ONVIF discovery fails, add the camera manually as a custom RTSP source:
 
-| Feld | Wert |
-|------|------|
-| Marke | Benutzerdefiniert (RTSP) |
-| Protokoll | RTSP |
-| IP-Adresse | `<pi-ip>` |
+| Field | Value |
+|-------|-------|
+| Brand | User-defined (RTSP) |
+| Protocol | RTSP |
+| IP address | `<pi-ip>` |
 | Port | `554` |
-| Primärer Stream | `rtsp://<pi-ip>/thermal` |
-| Benutzername | `admin` |
-| Kennwort | `admin` |
+| Primary stream | `rtsp://<pi-ip>/thermal` |
+| Username | `admin` |
+| Password | `admin` |
 
 ---
 
-### Bewegungserkennung in Surveillance Station
+### Motion detection in Surveillance Station
 
-- **Kameraseitig (ONVIF Events):** Surveillance Station abonniert `tns1:VideoSource/MotionAlarm` via PullPoint. Alarm wenn > 5 % der Pixel sich um > 2 °C ändern. Einstellung: Kamera → Bewegungserkennung → **Kameraseitig**.
-- **Surveillance Station intern:** Surveillance Station analysiert den Stream selbst. Für thermische Bilder empfehlen sich höhere Empfindlichkeitsstufen, da die JET-Colormap Temperaturdifferenzen stark verstärkt.
+- **Camera-side (ONVIF Events):** Surveillance Station subscribes to `tns1:VideoSource/MotionAlarm` via PullPoint. An alarm fires when more than 5 % of pixels change by more than 2 °C. Enable under Camera → Motion Detection → **By camera**.
+- **Surveillance Station internal:** Surveillance Station analyses the stream itself using frame differencing. For thermal images, higher sensitivity levels are recommended since the JET colormap strongly amplifies temperature differences.
 
 ---
 
