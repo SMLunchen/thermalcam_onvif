@@ -26,7 +26,7 @@ A separate `mediamtx` service transcodes the MJPEG stream to H.264 and serves it
 |-----------|--------|
 | Board | Raspberry Pi (tested on Pi 3 / 4, 64-bit OS) |
 | Sensor | Meridian Innovation MI48 – 80×62 pixels, up to 25.5 FPS |
-| HAT | Meridian Bobcat µHAT |
+| HAT | [Waveshare Thermal Camera HAT](https://www.waveshare.com/wiki/Thermal_Camera_HAT) |
 | Interface | SPI (frames) + I²C (control) |
 
 ### GPIO wiring
@@ -84,12 +84,15 @@ sudo bash setup.sh
 
 `setup.sh` is idempotent – safe to re-run after updates. It:
 1. Installs system packages (`python3-numpy`, `python3-opencv`, `ffmpeg`, …)
-2. Installs the `pysenxor` driver
+2. Installs the `pysenxor` driver (Meridian Innovation, bundled in `Thermal_Camera_Hat/`)
 3. Enables SPI and I²C via `raspi-config`
-4. Creates default `auth.json` if absent
-5. Downloads mediamtx v1.17.1 (arm64)
-6. Writes `/etc/mediamtx/mediamtx.yml`
-7. Installs and starts both systemd services
+4. Adds `dtoverlay=spi0-0cs` to `/boot/config.txt` – required so the MI48's manual GPIO chip-select (BCM7) doesn't conflict with the SPI hardware CS line
+5. Creates default `auth.json` if absent
+6. Downloads mediamtx v1.17.1 (arm64)
+7. Writes `/etc/mediamtx/mediamtx.yml`
+8. Installs and starts both systemd services
+
+> **Reboot required on first install.** If `config.txt` was modified (step 4), setup.sh will print a reminder. The thermal camera HAT will not be accessible until after `sudo reboot`.
 
 ### Manual dependency install (without setup.sh)
 
