@@ -1,3 +1,15 @@
-numpy>=1.19.0
-opencv-python>=4.5.0
-adafruit-circuitpython-mlx90640>=1.4.0
+# All dependencies are installed via setup.sh (preferred).
+# This file documents the runtime requirements for reference.
+#
+# Installed via apt (python3-* packages):
+#   numpy          python3-numpy
+#   opencv-python  python3-opencv
+#   smbus          python3-smbus
+#   spidev         python3-spidev
+#   gpiozero       python3-gpiozero
+#
+# Installed via pip from local source:
+#   senxor (Meridian pysenxor driver) – Thermal_Camera_Hat/pysenxor-master/
+#
+# Install everything at once:
+#   sudo bash setup.sh
