@@ -1,12 +1,15 @@
-Metadata-Version: 2.1
+Metadata-Version: 1.1
 Name: pysenxor
 Version: 1.4.1
 Summary: Python SDK for Meridian Innovation's SenXor.
+Home-page: UNKNOWN
 Author: Stanislav Markov, Meridian Innovation Ltd.
+Author-email: UNKNOWN
+License: UNKNOWN
+Description: 
+        
+        
 Platform: platform independent
 Classifier: Programming Language :: Python
 Classifier: Operating System :: OS Independent
 Classifier: Topic :: Scientific/Engineering
-
-
-
